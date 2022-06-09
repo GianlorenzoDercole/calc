@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
 
-function App() {
+class Calculator extends Component {
+  state = {
+    num1: 5,
+    num2: 5,
+    sum: 10
+
+  }
+  setNum = (e) => {
+    this.setState({ [e.target.name]: e.target.value});
+  }
+  add = (e) => {
+    e.preventDefault()
+    this.setState({sum: (parseInt(this.state.num1) + parseInt(this.state.num2))})
+  }
+  render() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <div className="caclulator">
+    <h1>Add with React!</h1>
+
+    <form onSubmit={this.calculate}>
+        <input type="number"
+            name="num1"
+            value={this.state.num1}
+            onChange={this.setNum}
+        />
+        <span>+</span>
+        <input type="number"
+            name="num2"
+            value={this.state.num2}
+            onChange={this.setNum}
+        />
+        <button onClick={this.add}>=</button>
+        <h3>{this.state.sum}</h3>
+    </form>
+  </div>
+  )
+  }
+
+
 }
 
-export default App;
+export default Calculator
